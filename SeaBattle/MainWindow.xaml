@@ -1,0 +1,21 @@
+﻿<Window x:Class="SeaBattle.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SeaBattle"
+        mc:Ignorable="d"
+        Name="SeaBattle" Height="600" Width="1041" ResizeMode="NoResize">
+    <Grid x:Name="grid1" >
+        <Grid.Background>
+            <ImageBrush ImageSource="/Image/SeeBattle.jpg"/>
+        </Grid.Background>
+        <Grid x:Name="pole_i" HorizontalAlignment="Left" Height="401" Margin="560,40,0,0" VerticalAlignment="Top" Width="401" Background="White" MouseUp="pole_c_MouseUp"/>
+        <Grid x:Name="pole_c" HorizontalAlignment="Left" Height="401" Margin="40,40,0,0" VerticalAlignment="Top" Width="401" Background="White" MouseUp="pole_i_MouseUp"/>
+        <Button x:Name="btn" Content="Начать игру" HorizontalAlignment="Left" Margin="453,10,0,0" VerticalAlignment="Top" Width="86" Height="40" Click="Button_Click" UseLayoutRounding="False"/>
+        <CheckBox Name="vert" Content="вертикально" HorizontalAlignment="Left" Margin="446,55,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontSize="13"/>
+        <TextBlock HorizontalAlignment="Left" Margin="398,446,0,0" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Top"  Height="39" Width="194"><Run Text="Вероятность попадания в корабль:"/><InlineUIContainer>
+                <TextBox Height="23" TextWrapping="Wrap"  Width="192"/>
+            </InlineUIContainer></TextBlock>
+    </Grid>
+</Window>
