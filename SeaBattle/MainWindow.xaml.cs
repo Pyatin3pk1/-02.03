@@ -351,27 +351,27 @@ namespace SeaBattle
         private void CheckDestroyedShip(int x, int y, int size)
         {
             int hits = 0;
-    for (int i = 0; i < size; i++)
-    {
-        if (array[x + i, y] == 5)
-        {
-            hits++;
-        }
-    }
-    if (hits == size)
-    {
-        for (int i = 0; i < size; i++)
-        {
-            Rectangle rectangle = new Rectangle();
-            rectangle.Fill = new SolidColorBrush(Colors.Red);
-            rectangle.Width = 40;
-            rectangle.Height = 40;
-            double x_k = -360 + (x + i) * 80;
-            double y_k = -360 + y * 80;
-            rectangle.Margin = new Thickness(x_k, y_k, 0, 0);
-            pole_i.Children.Add(rectangle);
-        }
-    }
+            for (int i = 0; i < size; i++)
+            {
+                if (array[x + i, y] == 5)
+                {
+                    hits++;
+                }
+            }
+            if (hits == size)
+            {
+                for (int i = 0; i < size; i++)
+                {
+                    Rectangle rectangle = new Rectangle();
+                    rectangle.Fill = new SolidColorBrush(Colors.Red);
+                    rectangle.Width = 40;
+                    rectangle.Height = 40;
+                    double x_k = -360 + (x + i) * 80;
+                    double y_k = -360 + y * 80;
+                    rectangle.Margin = new Thickness(x_k, y_k, 0, 0);
+                    pole_i.Children.Add(rectangle);
+                }
+            }
         }
         private void pole_c_MouseUp(object sender, MouseButtonEventArgs e)
         {
