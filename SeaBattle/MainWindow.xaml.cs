@@ -349,7 +349,62 @@ namespace SeaBattle
             if (a > 10) b = 0;
             a++;
         }
-        //Поле стрельбы по караблям
+        //медот для замены модели корабля при полном уничтожении
+        private void CheckDestroyedShip(int x, int y, int size)
+        {
+            var hits = new List<Point>();
+            hits.Add(new Point(x, y));
+
+            for (int i = 1; i <= size && hits.Count < size; i++)
+            {
+                if (x + i <= 9 && array[x + i, y] == 5)
+                    hits.Add(new Point(x + i, y));
+                else break;
+            }
+
+            for (int i = 1; i <= size && hits.Count < size; i++)
+            {
+                if (x - i >= 0 && array[x - i, y] == 5)
+                    hits.Add(new Point(x - i, y));
+                else break;
+            }
+
+            for (int i = 1; i <= size && hits.Count < size; i++)
+            {
+                if (y + i <= 9 && array[x, y + i] == 5)
+                    hits.Add(new Point(x, y + i));
+                else break;
+            }
+
+            for (int i = 1; i <= size && hits.Count < size; i++)
+            {
+                if (y - i >= 0 && array[x, y - i] == 5)
+                    hits.Add(new Point(x, y - i));
+                else break;
+            }
+
+            if (hits.Count == size)
+            {
+                for (int i = 0; i < size; i++)
+                {
+                    Rectangle rectangle = new Rectangle();
+                    rectangle.Fill = new SolidColorBrush(Colors.Red);
+                    rectangle.Width = 40;
+                    rectangle.Height = 40;
+                    double x_k = -360 + hits[i].X * 80;
+                    double y_k = -360 + hits[i].Y * 80;
+                    rectangle.Margin = new Thickness(x_k, y_k, 0, 0);
+                    pole_i.Children.Add(rectangle);
+                    
+                }
+                MessageBox.Show($"Корабль состоящий из {hits.Count} палуб подбит");
+            }
+            if (true)///для дебага 
+            {
+                Console.Write("");
+            }
+        }
+            //Поле стрельбы по караблям
         private void ShootingField_MouseUp(object sender, MouseButtonEventArgs e)
         {
            Point pt = e.GetPosition(this);
@@ -370,21 +425,29 @@ namespace SeaBattle
                 no_p(x_k, y_k);
                 shoot--;
             }
+            else if (array[x, y] == 6)
+            {
+                no_p(x_k, y_k);
+            }
             else if (array[x, y] == 0)
             {
                 no_p(x_k, y_k);
-                shoot--;
                 array[x, y] = 6;
             }
             else
             {
+                int size = array[x, y];
                 array[x, y] = 5;
                 krest_p(x, y);
-                shoot--;
+                CheckDestroyedShip(x, y, size);
                 hod++;
-                
             }
-            VerText.Text = String.Format("{0:F5}", (20 - hod) / shoot); // Подсчёт вероятности попаданя в корабль
+
+            if (hod == 4)///для дебага (визуализация поля)
+            {
+                Console.Write("");
+            }
+            VerText.Text = String.Format("{0:F7}", (20 - hod) / shoot); // Подсчёт вероятности попаданя в корабль
             if (hod == 20)
             {
                MessageBox.Show("Поздравляем!  Вы победили!");
