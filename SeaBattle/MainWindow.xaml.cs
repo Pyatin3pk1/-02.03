@@ -428,11 +428,13 @@ namespace SeaBattle
             else if (array[x, y] == 6)
             {
                 no_p(x_k, y_k);
+                shoot--;
             }
             else if (array[x, y] == 0)
             {
                 no_p(x_k, y_k);
                 array[x, y] = 6;
+                shoot--;
             }
             else
             {
@@ -441,11 +443,6 @@ namespace SeaBattle
                 krest_p(x, y);
                 CheckDestroyedShip(x, y, size);
                 hod++;
-            }
-
-            if (hod == 4)///для дебага (визуализация поля)
-            {
-                Console.Write("");
             }
             VerText.Text = String.Format("{0:F7}", (20 - hod) / shoot); // Подсчёт вероятности попаданя в корабль
             if (hod == 20)
